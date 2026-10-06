@@ -1,0 +1,14 @@
+# Render.com blueprint — deploy Intercept as a free web service.
+# After pushing this repo to GitHub: Render → New → Blueprint → pick this repo.
+# Then set the TRANSLINK_API_KEY env var (your TransLink developer key).
+services:
+  - type: web
+    name: intercept
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: TRANSLINK_API_KEY
+        sync: false   # set this in the Render dashboard (kept secret)

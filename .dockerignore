@@ -1,0 +1,18 @@
+# Keep the build context small and the image clean.
+node_modules
+npm-debug.log
+.git
+.gitignore
+
+# Never bake secrets into the image (set TRANSLINK_API_KEY as a host env var).
+.env
+
+# The big generated DB is rebuilt inside the image from data/gtfs.zip.
+data/gtfs.db
+data/gtfs.db-shm
+data/gtfs.db-wal
+data/gtfs
+
+# Editor / OS noise
+.DS_Store
+*.log

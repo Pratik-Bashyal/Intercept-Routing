@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Intercept — Metro Vancouver transit</title>
+  <meta name="theme-color" content="#1a73e8" />
+  <meta name="description" content="Catch the better route. Live bus intercepts, trip planning and departures for Metro Vancouver." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Intercept" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Floating search panel (Google-style) -->
+  <div id="panel">
+    <div class="brand">
+      <span class="logo">🚍</span>
+      <div>
+        <div class="title">Intercept</div>
+        <div class="tagline">Catch the better route — Metro Vancouver</div>
+      </div>
+    </div>
+
+    <div class="searchbox">
+      <div class="rail">
+        <span class="dot o"></span>
+        <span class="line"></span>
+        <span class="dot d"></span>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <input id="oAddr" placeholder="Choose starting point" autocomplete="off" />
+          <button id="locBtn" class="mini" title="Use my location">◎</button>
+          <div id="oResults" class="geoResults"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <input id="dAddr" placeholder="Choose destination" autocomplete="off" />
+          <div id="dResults" class="geoResults"></div>
+        </div>
+      </div>
+      <button id="swapBtn" class="swap" title="Swap">⇅</button>
+    </div>
+
+    <div class="modes">
+      <button class="mode active" data-mode="catch">🎯 Catch a bus</button>
+      <button class="mode" data-mode="plan">🗓️ Plan trip</button>
+      <button class="mode" data-mode="departures">🕒 Departures</button>
+    </div>
+
+    <button id="goBtn" class="go">Search</button>
+    <button id="advToggle" class="link">Advanced ▾</button>
+
+    <div id="advanced" class="advanced hidden">
+      <label>Target route — manual live check</label>
+      <div class="field solo">
+        <input list="routeList" id="target" placeholder="e.g. 026, R4, Expo Line" />
+        <datalist id="routeList"></datalist>
+      </div>
+      <button id="liveBtn" class="ghost">📡 Check this route live</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="results"></div>
+
+    <div class="hintbar">💡 Tip: type an address or click the map. "Catch a bus" needs only start + destination.</div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+    }
+  </script>
+</body>
+</html>

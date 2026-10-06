@@ -1,0 +1,11 @@
+# Secrets — never commit your API key
+.env
+
+# Dependencies
+node_modules/
+
+# GTFS data (large) and generated DB
+data/gtfs/
+# data/gtfs.zip is committed so the cloud image can rebuild the DB
+data/gtfs.db
+data/gtfs.db-*

@@ -1,0 +1,22 @@
+{
+  "name": "transit-app",
+  "version": "1.0.0",
+  "description": "Bus intercept planner for Metro Vancouver (TransLink)",
+  "main": "src/intercept.js",
+  "scripts": {
+    "load": "node src/loadGtfs.js",
+    "plan": "node src/cli.js",
+    "live": "node src/liveIntercept.js",
+    "rt": "node src/realtime.js",
+    "junctions": "node src/explore.js",
+    "web": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "csv-parse": "^7.0.3",
+    "gtfs-realtime-bindings": "^2.2.0"
+  }
+}
