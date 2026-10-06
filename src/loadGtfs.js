@@ -72,6 +72,10 @@ async function main() {
   const db = new Database(DB_PATH);
   db.pragma("journal_mode = WAL");
   db.pragma("synchronous = OFF");
+  // Bound memory for constrained build environments (e.g. free cloud tiers):
+  // keep a small page cache and spill temp (index builds) to disk, not RAM.
+  db.pragma("cache_size = -16000"); // ~16 MB
+  db.pragma("temp_store = FILE");
 
   db.exec(`
     CREATE TABLE routes (route_id TEXT PRIMARY KEY, short_name TEXT, long_name TEXT, route_type INT);

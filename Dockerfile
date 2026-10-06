@@ -1,11 +1,10 @@
 # Intercept — Metro Vancouver transit (cloud image)
 # Rebuilds the SQLite GTFS DB at build time from the committed gtfs.zip,
 # so the large data/gtfs.db is never committed to git.
-FROM node:20-bookworm-slim
+FROM node:20-bookworm
 
-# unzip (expand GTFS feed) + build toolchain (better-sqlite3 compiles natively).
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        unzip python3 make g++ \
+# unzip to expand the committed GTFS feed (build tools already in this image).
+RUN apt-get update && apt-get install -y --no-install-recommends unzip \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
