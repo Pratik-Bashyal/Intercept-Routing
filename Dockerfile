@@ -3,8 +3,9 @@
 # so the large data/gtfs.db is never committed to git.
 FROM node:20-bookworm-slim
 
-# unzip is needed to expand the committed GTFS feed during build.
-RUN apt-get update && apt-get install -y --no-install-recommends unzip \
+# unzip (expand GTFS feed) + build toolchain (better-sqlite3 compiles natively).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        unzip python3 make g++ \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
