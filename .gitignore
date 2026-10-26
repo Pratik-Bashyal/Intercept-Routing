@@ -9,3 +9,10 @@ data/gtfs/
 # data/gtfs.zip is committed so the cloud image can rebuild the DB
 data/gtfs.db
 data/gtfs.db-*
+
+# Local tunnel/runtime artifacts
+cloudflared.exe
+current-url.txt
+tunnel.log
+tunnel.out
+eval-pairs.csv
